@@ -3,8 +3,20 @@ export class StringCalculator {
     if (input === '') {
       return 0;
     }
-    let numbers = input.split(',').map(num => Number(num));
-    const sum = numbers.reduce((sum, num) => sum + num, 0);
-    return sum;
+    if (input.includes(',')) {
+      let numbers = input.split(',').map(num => this.parseStringToNumber(num));
+      const sum = numbers.reduce((sum, num) => sum + num, 0);
+      return sum;
+    }
+    
+    return this.parseStringToNumber(input);
+  }
+
+  parseStringToNumber(input: string): number {
+    const output = parseInt(input);
+    if (isNaN(output)) {
+      return 0;
+    }
+    return output;
   }
 }
