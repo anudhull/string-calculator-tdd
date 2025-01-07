@@ -4,22 +4,24 @@ export class StringCalculator {
       return 0;
     }
     const delimiters = [',', '\n'];
-    const delimiterRegex = new RegExp(delimiters.join('|'));
+    let delimiterRegex = new RegExp(delimiters.join('|'));
 
-    if (delimiterRegex.test(input)) {
-      let numbers = input.split(delimiterRegex).map(num => this.parseStringToNumber(num));
-      const sum = numbers.reduce((sum, num) => sum + num, 0);
-      return sum;
+    if (input.startsWith('//')) {
+      const customDelimiter = input[2];
+      delimiterRegex = new RegExp(customDelimiter);
+      input = input.slice(4);
     }
 
-    return this.parseStringToNumber(input);
+    const numbers = input.split(delimiterRegex).map(num => this.parseStringToNumber(num));
+    return this.calculateSum(numbers);
   }
 
   parseStringToNumber(input: string): number {
     const output = parseInt(input);
-    if (isNaN(output)) {
-      return 0;
-    }
-    return output;
+    return isNaN(output) ? 0 : output;
+  }
+
+  private calculateSum(numbers: number[]): number {
+    return numbers.reduce((sum, num) => sum + num, 0);
   }
 }

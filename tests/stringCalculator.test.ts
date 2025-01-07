@@ -20,7 +20,7 @@ describe('StringCalculator Tests', () => {
   });
 
   it('should ignore non-numeric values and return sum of valid numbers', () => {
-    expect(calculator.add('1,4,abc')).toBe(5);
+    expect(calculator.add('1\n4,abc')).toBe(5);
   });
 
   it('input containing only non-numeric characters should return 0', () => {
@@ -33,5 +33,9 @@ describe('StringCalculator Tests', () => {
 
   it('input containing multiple delimiters together should return sum', () => {
     expect(calculator.add('1,9,5\n3')).toBe(18);
+  });
+
+  it('supports custom delimiter and returns sum', () => {
+    expect(calculator.add('//;\n1;2;3')).toBe(6);
   });
 });
