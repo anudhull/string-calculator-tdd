@@ -14,4 +14,8 @@ describe('StringCalculator Tests', () => {
   it('single number should return the number itself', () => {
     expect(calculator.add('1')).toBe(1);
   });
+
+  it('string containing comma separated numbers should return the sum', () => {
+    expect(calculator.add('1,4,2')).toBe(7);
+  });
 });
