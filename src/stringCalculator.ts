@@ -3,12 +3,15 @@ export class StringCalculator {
     if (input === '') {
       return 0;
     }
-    if (input.includes(',')) {
-      let numbers = input.split(',').map(num => this.parseStringToNumber(num));
+    const delimiters = [',', '\n'];
+    const delimiterRegex = new RegExp(delimiters.join('|'));
+
+    if (delimiterRegex.test(input)) {
+      let numbers = input.split(delimiterRegex).map(num => this.parseStringToNumber(num));
       const sum = numbers.reduce((sum, num) => sum + num, 0);
       return sum;
     }
-    
+
     return this.parseStringToNumber(input);
   }
 

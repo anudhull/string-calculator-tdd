@@ -26,4 +26,12 @@ describe('StringCalculator Tests', () => {
   it('input containing only non-numeric characters should return 0', () => {
     expect(calculator.add('%*%')).toBe(0);
   });
+
+  it('input containing new line as delimiter should return sum', () => {
+    expect(calculator.add('1\n5\n3')).toBe(9);
+  });
+
+  it('input containing multiple delimiters together should return sum', () => {
+    expect(calculator.add('1,9,5\n3')).toBe(18);
+  });
 });
