@@ -12,27 +12,29 @@ export class StringCalculator {
   }
 
   private extractDelimiters(input: string): { delimiters: string[], processedInput: string } {
-    const defaultDelimiters = [',', '\n'];
+    const combinedDelimiters = [',', '\n'];
     let processedInput = input;
 
     if (input.startsWith('//')) {
-      let customDelimiters = [];
-      let remainder = input.slice(4);
+      processedInput = input.slice(4);
 
       if (input.includes('[') && input.includes(']')) {
-        const startBracketIndex = input.indexOf('[');
-        const endBracketIndex = input.lastIndexOf(']');
-        const splittedDelimiters = input.substring(startBracketIndex + 1, endBracketIndex).split('][');
-        customDelimiters.push(...splittedDelimiters);
-        remainder = input.substring(endBracketIndex + 2,);
+        const delimiters = this.extractCustomDelimiters(input);
+        combinedDelimiters.push(...delimiters);
+        processedInput = input.slice(input.lastIndexOf(']') + 1);
       } else {
-        customDelimiters.push(input[2]);
+        combinedDelimiters.push(input[2]);
       }
-      defaultDelimiters.push(...customDelimiters);
-      processedInput = remainder;
     }
 
-    return { delimiters: defaultDelimiters, processedInput };
+    return { delimiters: combinedDelimiters, processedInput };
+  }
+
+  private extractCustomDelimiters(input: string): string[] {
+    const startBracketIndex = input.indexOf('[');
+    const endBracketIndex = input.lastIndexOf(']');
+    const splittedDelimiters = input.substring(startBracketIndex + 1, endBracketIndex).split('][');
+    return splittedDelimiters;
   }
 
   private splitInput(input: string, delimiterRegex: RegExp): number[] {
