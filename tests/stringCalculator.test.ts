@@ -57,4 +57,8 @@ describe('StringCalculator Tests', () => {
   it('custom delimiter with provided delimiters should return sum', () => {
     expect(calculator.add('//;\n1;2,3\n4;5')).toBe(15);
   });
+
+  it('input containing extra characters in between delimiters should return sum', () => {
+    expect(calculator.add('1 ,*  ,2 \n 3')).toBe(6);
+  });
 });
