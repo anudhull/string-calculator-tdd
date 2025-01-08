@@ -13,10 +13,16 @@ export class StringCalculator {
     }
 
     const numbers = input.split(delimiterRegex).map(num => this.parseStringToNumber(num));
+
+    const negativeNumbers = numbers.filter(num => num < 0);
+    if (negativeNumbers.length > 0) {
+      throw new Error(`negative numbers not allowed: ${negativeNumbers.join(', ')}`);
+    }
+
     return this.calculateSum(numbers);
   }
 
-  parseStringToNumber(input: string): number {
+  private parseStringToNumber(input: string): number {
     const output = parseInt(input);
     return isNaN(output) ? 0 : output;
   }
