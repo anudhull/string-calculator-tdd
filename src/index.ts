@@ -1,5 +1,5 @@
 import { StringCalculator } from './stringCalculator';
 
+// test function here
 const calculator = new StringCalculator();
-console.log(calculator.add(''));
-console.log(calculator.add('4'));
+calculator.add('');
