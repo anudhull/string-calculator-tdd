@@ -4,14 +4,14 @@ export class StringCalculator {
       return 0;
     }
     const delimiters = [',', '\n'];
-    let delimiterRegex = new RegExp(delimiters.join('|'));
 
     if (input.startsWith('//')) {
       const customDelimiter = input[2];
-      delimiterRegex = new RegExp(customDelimiter);
+      delimiters.push(customDelimiter);
       input = input.slice(4);
     }
-
+    
+    let delimiterRegex = new RegExp(`[${delimiters.join("")}]`);
     const numbers = input.split(delimiterRegex).map(num => this.parseStringToNumber(num));
     this.handleNegativeNumbers(numbers);
 
