@@ -61,4 +61,8 @@ describe('StringCalculator Tests', () => {
   it('input containing extra characters in between delimiters should return sum', () => {
     expect(calculator.add('1 ,*  ,2 \n 3')).toBe(6);
   });
+
+  it('should ignore numbers greater than 1000', () => {
+    expect(calculator.add('2, 1001')).toBe(2);
+  });
 });

@@ -30,8 +30,8 @@ export class StringCalculator {
   }
 
   private parseStringToNumber(input: string): number {
-    const output = parseInt(input);
-    return isNaN(output) ? 0 : output;
+    const number = parseInt(input);
+    return isNaN(number) || number > 1000 ? 0 : number;
   }
 
   private calculateSum(numbers: number[]): number {
