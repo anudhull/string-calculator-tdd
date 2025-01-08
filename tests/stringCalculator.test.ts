@@ -35,8 +35,15 @@ describe('StringCalculator Tests', () => {
     expect(calculator.add('1,9,5\n3')).toBe(18);
   });
 
+  it('input containing multiple consecutive delimiters should return sum', () => {
+    expect(calculator.add('1,9,5,\n,\n\n3')).toBe(18);
+  });
+
   it('supports custom delimiter and returns sum', () => {
     expect(calculator.add('//;\n1;2;3')).toBe(6);
+    expect(calculator.add('//.\n1.2.3')).toBe(6); 
+    expect(calculator.add('//)\n1)2)3')).toBe(6); 
+    expect(calculator.add('//*\n1*2*3')).toBe(6); 
   });
 
   it('single negative number should throw an error with that number', () => {
@@ -45,5 +52,9 @@ describe('StringCalculator Tests', () => {
 
   it('multiple negative numbers should throw an error with all the negative numbers', () => {
     expect(() => calculator.add('1,-2\n-3,-4')).toThrow('negative numbers not allowed: -2, -3, -4');
+  });
+
+  it('custom delimiter with provided delimiters should return sum', () => {
+    expect(calculator.add('//;\n1;2,3\n4;5')).toBe(15);
   });
 });
