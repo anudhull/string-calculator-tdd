@@ -24,7 +24,7 @@ export class StringCalculator {
         const endBracketIndex = input.lastIndexOf(']');
         const splittedDelimiters = input.substring(startBracketIndex + 1, endBracketIndex).split('][');
         customDelimiters.push(...splittedDelimiters);
-        remainder = input.substring(endBracketIndex + 1,);
+        remainder = input.substring(endBracketIndex + 2,);
       } else {
         customDelimiters.push(input[2]);
       }

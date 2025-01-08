@@ -73,7 +73,12 @@ describe('StringCalculator Tests', () => {
   });
 
   it('input containing multiple custom delimiters should return sum', () => {
-    expect(calculator.add('//[*][.]1.2*3')).toBe(6);
-    expect(calculator.add('//[=][|][^]1=2^3')).toBe(6);
+    expect(calculator.add('//[*][.]\n1.2*3')).toBe(6);
+    expect(calculator.add('//[=][|][^]\n1=2^3')).toBe(6);
+  }); 
+
+  it('input containing multiple custom delimiters with any length should return sum', () => {
+    expect(calculator.add('//[**][--]\n1--2**3')).toBe(6);
+    expect(calculator.add('//[-.-][<^>]\n1-.-2<^>3')).toBe(6);
   }); 
 });
