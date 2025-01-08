@@ -13,11 +13,7 @@ export class StringCalculator {
     }
 
     const numbers = input.split(delimiterRegex).map(num => this.parseStringToNumber(num));
-
-    const negativeNumbers = numbers.filter(num => num < 0);
-    if (negativeNumbers.length > 0) {
-      throw new Error(`negative numbers not allowed: ${negativeNumbers.join(', ')}`);
-    }
+    this.handleNegativeNumbers(numbers);
 
     return this.calculateSum(numbers);
   }
@@ -29,5 +25,12 @@ export class StringCalculator {
 
   private calculateSum(numbers: number[]): number {
     return numbers.reduce((sum, num) => sum + num, 0);
+  }
+
+  private handleNegativeNumbers(numbers: number[]): void {
+    const negativeNumbers = numbers.filter(num => num < 0);
+    if (negativeNumbers.length > 0) {
+      throw new Error(`negative numbers not allowed: ${negativeNumbers.join(', ')}`);
+    }
   }
 }
