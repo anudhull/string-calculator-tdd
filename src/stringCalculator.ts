@@ -16,16 +16,19 @@ export class StringCalculator {
     let processedInput = input;
 
     if (input.startsWith('//')) {
-      let customDelimiter = input[2];
+      let customDelimiters = [];
       let remainder = input.slice(4);
 
       if (input.includes('[') && input.includes(']')) {
         const startBracketIndex = input.indexOf('[');
-        const endBracketIndex = input.indexOf(']');
-        customDelimiter = input.substring(startBracketIndex + 1, endBracketIndex);
+        const endBracketIndex = input.lastIndexOf(']');
+        const splittedDelimiters = input.substring(startBracketIndex + 1, endBracketIndex).split('][');
+        customDelimiters.push(...splittedDelimiters);
         remainder = input.substring(endBracketIndex + 1,);
+      } else {
+        customDelimiters.push(input[2]);
       }
-      defaultDelimiters.push(customDelimiter);
+      defaultDelimiters.push(...customDelimiters);
       processedInput = remainder;
     }
 
