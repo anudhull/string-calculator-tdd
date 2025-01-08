@@ -65,4 +65,9 @@ describe('StringCalculator Tests', () => {
   it('should ignore numbers greater than 1000', () => {
     expect(calculator.add('2, 1001')).toBe(2);
   });
+
+  it('supports custom delimiters of any length', () => {
+    expect(calculator.add('//[***]\n1***2***3')).toBe(6);
+    expect(calculator.add('//[--]\n1--2--3')).toBe(6);
+  });  
 });

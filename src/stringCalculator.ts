@@ -16,8 +16,15 @@ export class StringCalculator {
     let processedInput = input;
 
     if (input.startsWith('//')) {
-      const customDelimiter = input[2];
-      const remainder = input.slice(4);
+      let customDelimiter = input[2];
+      let remainder = input.slice(4);
+
+      if (input.includes('[') && input.includes(']')) {
+        const startBracketIndex = input.indexOf('[');
+        const endBracketIndex = input.indexOf(']');
+        customDelimiter = input.substring(startBracketIndex + 1, endBracketIndex);
+        remainder = input.substring(endBracketIndex + 1,);
+      }
       defaultDelimiters.push(customDelimiter);
       processedInput = remainder;
     }
