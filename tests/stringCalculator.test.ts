@@ -84,5 +84,6 @@ describe('StringCalculator Tests', () => {
 
   it('input containing delimiters should return multiplication', () => {
     expect(calculator.multiply('1,2,4')).toBe(8);
+    expect(calculator.multiply('0\n,3')).toBe(0);
   });  
 });

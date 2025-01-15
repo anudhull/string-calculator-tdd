@@ -1,20 +1,17 @@
 export class StringCalculator {
 
   add(input: string): number {
-    if (input === '') return 0;
-
-    const { delimiters, processedInput } = this.extractDelimiters(input);
-    
-    let delimiterRegex = new RegExp(`[${delimiters.join("")}]`);
-    const numbers = this.extractNumbers(processedInput, delimiterRegex);
-
-    this.handleNegativeNumbers(numbers);
-
+    const numbers = this.processInputAndExtractNumbers(input);
     return this.calculateSum(numbers);
   }
 
   multiply(input: string) : number {
-    if (input === '') return 0;
+    const numbers = this.processInputAndExtractNumbers(input);
+    return this.calculateMultiplication(numbers);
+  }
+
+  private processInputAndExtractNumbers(input: string): number[] {
+    if (input === '') return [0];
 
     const { delimiters, processedInput } = this.extractDelimiters(input);
     
@@ -22,7 +19,8 @@ export class StringCalculator {
     const numbers = this.extractNumbers(processedInput, delimiterRegex);
 
     this.handleNegativeNumbers(numbers);
-    return this.calculateMultiplication(numbers);
+
+    return numbers;
   }
 
   private extractDelimiters(input: string): { delimiters: string[], processedInput: string } {
