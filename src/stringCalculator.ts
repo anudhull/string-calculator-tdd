@@ -1,14 +1,28 @@
 export class StringCalculator {
+
   add(input: string): number {
     if (input === '') return 0;
 
     const { delimiters, processedInput } = this.extractDelimiters(input);
+    
     let delimiterRegex = new RegExp(`[${delimiters.join("")}]`);
-    const numbers = this.splitInput(processedInput, delimiterRegex);
+    const numbers = this.extractNumbers(processedInput, delimiterRegex);
 
     this.handleNegativeNumbers(numbers);
 
     return this.calculateSum(numbers);
+  }
+
+  multiply(input: string) : number {
+    if (input === '') return 0;
+
+    const { delimiters, processedInput } = this.extractDelimiters(input);
+    
+    let delimiterRegex = new RegExp(`[${delimiters.join("")}]`);
+    const numbers = this.extractNumbers(processedInput, delimiterRegex);
+
+    this.handleNegativeNumbers(numbers);
+    return this.calculateMultiplication(numbers);
   }
 
   private extractDelimiters(input: string): { delimiters: string[], processedInput: string } {
@@ -37,7 +51,7 @@ export class StringCalculator {
     return splittedDelimiters;
   }
 
-  private splitInput(input: string, delimiterRegex: RegExp): number[] {
+  private extractNumbers(input: string, delimiterRegex: RegExp): number[] {
     return input.split(delimiterRegex).map(num => this.parseStringToNumber(num));
   }
 
@@ -48,6 +62,10 @@ export class StringCalculator {
 
   private calculateSum(numbers: number[]): number {
     return numbers.reduce((sum, num) => sum + num, 0);
+  }
+
+  private calculateMultiplication(numbers: number[]): number {
+    return numbers.reduce((sum, num) => sum * num, 1);
   }
 
   private handleNegativeNumbers(numbers: number[]): void {

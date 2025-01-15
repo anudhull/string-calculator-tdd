@@ -81,4 +81,8 @@ describe('StringCalculator Tests', () => {
     expect(calculator.add('//[**][--]\n1--2**3')).toBe(6);
     expect(calculator.add('//[-.-][<^>]\n1-.-2<^>3')).toBe(6);
   }); 
+
+  it('input containing delimiters should return multiplication', () => {
+    expect(calculator.multiply('1,2,4')).toBe(8);
+  });  
 });
